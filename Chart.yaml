@@ -5,7 +5,7 @@ home: https://github.com/bosbaber/bucketup
 
 type: application
 version: 1.0.0
-appVersion: "v1.0.0"
+appVersion: "main"
 
 dependencies:
   - name: common

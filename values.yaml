@@ -1,10 +1,21 @@
+bucketName: "bucketup-bucket"
+
+service:
+  - name: service
+    type: ClusterIP
+    annotations: {}
+    ports:
+      - port: 8080
+        targetPort: 8080
+        protocol: TCP
+        name: http
+
 containers:
   - name: server
     image:
-      repository: europe-west4-docker.pkg.dev/wallet-451208/interledger-app
+      repository: ghcr.io/bosbaber/bucketup
       name: backend
       pullPolicy: Always
-    envFrom: null
     resources:
       requests:
         memory: 128Mi

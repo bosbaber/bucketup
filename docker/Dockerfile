@@ -10,5 +10,4 @@ USER bucketup
 
 WORKDIR /home/bucketup
 
-
 ENTRYPOINT [ "/bin/bash", "/home/bucketup/run.sh" ]
