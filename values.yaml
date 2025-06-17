@@ -1,0 +1,18 @@
+containers:
+  - name: server
+    image:
+      repository: europe-west4-docker.pkg.dev/wallet-451208/interledger-app
+      name: backend
+      pullPolicy: Always
+    envFrom: null
+    resources:
+      requests:
+        memory: 128Mi
+        cpu: 100m
+      limits:
+        memory: 512Mi
+        cpu: 1
+    ports:
+      - name: http
+        containerPort: 8080
+        protocol: TCP
