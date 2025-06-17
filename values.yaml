@@ -13,8 +13,8 @@ service:
 containers:
   - name: server
     image:
-      repository: ghcr.io/bosbaber/bucketup
-      name: backend
+      repository: ghcr.io/bosbaber
+      name: bucketup
       pullPolicy: Always
     resources:
       requests:
