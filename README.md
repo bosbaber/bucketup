@@ -9,3 +9,6 @@ This projects provides a minimalistic Helm Chart that does the following:
 We find it useful for the following scenarios:
 - Serving maintenance pages
 - Distributing assets
+
+## Limitations
+- At the moment we only support buckets that are available to the public. Will be expanded soon.
