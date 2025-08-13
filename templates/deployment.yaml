@@ -1,4 +1,0 @@
-{{- include "common.deployment" (list . .Values .Values.autoscaling .Values.serviceAccount "bucketup.deployment") }}
-
-{{- define "bucketup.deployment" -}}
-{{- end }}

@@ -1,7 +1,0 @@
-{{- include "common.configMap" (list . "bucketup.configMap") }}
-
-{{- define "bucketup.configMap" -}}
-{{- $top := first . }}
-data:
-  BUCKET_NAME: {{ $top.Values.bucketName | quote }}
-{{- end }}
