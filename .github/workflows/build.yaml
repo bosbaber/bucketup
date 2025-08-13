@@ -176,6 +176,11 @@ jobs:
             --version "${{ steps.ver.outputs.clean }}" \
             --app-version "${{ steps.ver.outputs.raw }}" \
             -d tmp
+          
+          # undo the Chart.yaml changes
+          git checkout -- .
+          # Make sure tmp is stil there
+          ls tmp
 
       - name: Switch to 'serve' branch (create if it doesn't exist)
         run: |
