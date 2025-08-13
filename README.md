@@ -12,8 +12,8 @@ We find it useful for the following scenarios:
 
 ## Getting started
 ```
-helm repo add bosbaber bosbaber.github.io/bucketup
-helm install bucketup --set bucketName="my-gcs-bucket-name"
+helm repo add bucketuprepo http://bosbaber.github.io/bucketup
+helm install bucketup bucketuprepo/bucketup --set bucketName="my-gcs-bucket-name"
 ```
 
 ## Limitations
