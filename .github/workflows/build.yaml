@@ -1,5 +1,5 @@
 #
-name: Create, test (Kind) and publish a Docker image
+name: Test and build Docker image and Helm chart
 
 on:
   workflow_dispatch:
