@@ -10,5 +10,11 @@ We find it useful for the following scenarios:
 - Serving maintenance pages
 - Distributing assets
 
+## Getting started
+```
+helm repo add bosbaber bosbaber.github.io/bucketup
+helm install bucketup --set bucketName="my-gcs-bucket-name"
+```
+
 ## Limitations
 - At the moment we only support buckets that are available to the public. Will be expanded soon.
