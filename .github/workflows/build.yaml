@@ -3,10 +3,9 @@ name: Create, test (Kind) and publish a Docker image
 
 on:
   workflow_dispatch:
-  push:
+  pull_request:
 
-
-# Registry and repository used to name the image
+    
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
