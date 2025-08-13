@@ -13,6 +13,6 @@ mkdir -p content
 gsutil -m rsync -r "gs://$BUCKET_NAME" content
 
 # Start a simple HTTP server to serve the content
-cd content
-ls -la
-python3 -m http.server 8080 --bind 0.0.0.0
+ls -la content
+
+python3 server.py
