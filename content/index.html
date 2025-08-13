@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hello, Bucketup Frog!</title>
+  <style>
+    :root { --bg:#f7fafc; --card:#ffffff; --text:#0f172a; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    .card {
+      background: var(--card);
+      padding: 2rem 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+      text-align: center;
+    }
+    h1 { margin: 0 0 1rem; font-size: 2rem; }
+    .note { font-size: .9rem; opacity: .7; margin-top: .75rem; }
+    svg { width: 340px; height: auto; display: block; margin-inline: auto; }
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <h1>Hello, bucketup! 👋</h1>
+
+    <!-- Friendly frog waving (inline SVG) -->
+    <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+      <title id="title">Frog waving hello</title>
+      <desc id="desc">A cheerful green frog raises its right hand and waves.</desc>
+
+      <!-- Ground shadow -->
+      <ellipse cx="200" cy="265" rx="95" ry="18" fill="#cfd8dc" opacity="0.55"/>
+
+      <!-- Body -->
+      <g id="frog">
+        <!-- Belly -->
+        <ellipse cx="200" cy="200" rx="58" ry="44" fill="#d7f7d3"/>
+        <!-- Body -->
+        <ellipse cx="200" cy="195" rx="90" ry="70" fill="#7ed957" stroke="#2f7d32" stroke-width="4"/>
+        <!-- Head -->
+        <circle cx="200" cy="110" r="60" fill="#7ed957" stroke="#2f7d32" stroke-width="4"/>
+
+        <!-- Eyes -->
+        <g>
+          <circle cx="170" cy="85" r="16" fill="#ffffff" stroke="#2f7d32" stroke-width="3"/>
+          <circle cx="230" cy="85" r="16" fill="#ffffff" stroke="#2f7d32" stroke-width="3"/>
+          <circle cx="170" cy="88" r="6" fill="#1f2937"/>
+          <circle cx="230" cy="88" r="6" fill="#1f2937"/>
+          <circle cx="166" cy="82" r="3" fill="#ffffff" opacity="0.85"/>
+          <circle cx="226" cy="82" r="3" fill="#ffffff" opacity="0.85"/>
+        </g>
+
+        <!-- Smile -->
+        <path d="M170 125 Q200 145 230 125" fill="none" stroke="#1f2937" stroke-width="5" stroke-linecap="round"/>
+
+        <!-- Left arm (resting) -->
+        <path d="M130 175 Q110 195 115 215" fill="none" stroke="#66bf47" stroke-width="16" stroke-linecap="round"/>
+        <circle cx="115" cy="215" r="9" fill="#66bf47"/>
+
+        <!-- Right arm (waving) -->
+        <g id="right-arm">
+          <!-- Upper+forearm as one curved stroke -->
+          <!-- Shoulder position at (270,170) used as rotation pivot below -->
+          <path d="M270 170 Q310 150 325 115" fill="none" stroke="#66bf47" stroke-width="16" stroke-linecap="round"/>
+          <!-- Hand -->
+          <circle cx="325" cy="115" r="10" fill="#66bf47"/>
+          <!-- Little motion lines near the hand -->
+          <path d="M342 110 q12 -8 22 0" fill="none" stroke="#9adf78" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+          <path d="M342 122 q12 8 22 0" fill="none" stroke="#9adf78" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+
+          <!-- Wave animation -->
+          <animateTransform attributeName="transform"
+                            attributeType="XML"
+                            type="rotate"
+                            values="12 270 170; -14 270 170; 12 270 170"
+                            dur="1.3s"
+                            repeatCount="indefinite"/>
+        </g>
+
+        <!-- Toes -->
+        <g fill="#66bf47">
+          <ellipse cx="165" cy="255" rx="16" ry="10"/>
+          <ellipse cx="235" cy="255" rx="16" ry="10"/>
+        </g>
+      </g>
+    </svg>
+
+  </main>
+</body>
+</html>
+
