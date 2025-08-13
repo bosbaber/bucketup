@@ -5,11 +5,11 @@ home: https://github.com/bosbaber/bucketup
 
 type: application
 version: 1.0.0
-appVersion: "main"
+appVersion: "v1.0.2"
 
 dependencies:
   - name: common
-    version: 0.3.4
+    version: 0.4.2
     repository: https://interledger.github.io/charts/interledger
 
 maintainers:
