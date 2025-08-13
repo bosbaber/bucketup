@@ -1,21 +1,30 @@
 # Bucketup
+
 ![Publish Status](https://github.com/bosbaber/bucketup/actions/workflows/build.yaml/badge.svg)
 
-As a Kubernetes administrator there are times where we just need to serve some static content from inside our cluster so that we can either test out some new ingress settings, or provide arbitrary assets to a internal service.
+**Bucketup** is a minimal Helm chart for serving static content from within a Kubernetes cluster.
+It’s designed for situations where you quickly need to expose files—such as maintenance pages or shared assets—without deploying a full web application.
 
-This projects provides a minimalistic Helm Chart that does the following:
-- On startup, download static content from GCP bucket
-- Start a minimalistic http server to serve static content
+## Features
 
-We find it useful for the following scenarios:
-- Serving maintenance pages
-- Distributing assets
+* Automatically downloads static content from a specified Google Cloud Storage (GCS) bucket on startup.
+* Runs a lightweight HTTP server to serve the content.
+* Simple Helm-based deployment for rapid setup.
 
-## Getting started
-```
-helm repo add bucketuprepo http://bosbaber.github.io/bucketup
+## Common Use Cases
+
+* Displaying maintenance or “under construction” pages.
+* Serving internal assets to other services in the cluster.
+* Quickly testing ingress rules or service exposure.
+
+## Installation
+
+```bash
+helm repo add bucketuprepo https://bosbaber.github.io/bucketup
 helm install bucketup bucketuprepo/bucketup --set bucketName="my-gcs-bucket-name"
 ```
 
 ## Limitations
-- At the moment we only support buckets that are available to the public. Will be expanded soon.
+
+* Currently supports **publicly accessible** GCS buckets only.
+  (Support for private buckets and authentication is planned.)
