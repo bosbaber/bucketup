@@ -1,4 +1,4 @@
-bucketName: "bucketup-bucket"
+bucketName: "bucketup-sample"
 
 service:
   - name: service
