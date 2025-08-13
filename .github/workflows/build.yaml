@@ -4,7 +4,7 @@ name: Create, test (Kind) and publish a Docker image
 on:
   workflow_dispatch:
   push:
-    branches: ['main']
+
 
 # Registry and repository used to name the image
 env:
@@ -85,7 +85,7 @@ jobs:
     name: Build and push Docker image
     runs-on: ubuntu-latest
     needs: build-and-test
-    # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     permissions:
       contents: read
       packages: write
