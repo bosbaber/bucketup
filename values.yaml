@@ -1,5 +1,7 @@
 bucketName: "bucketup-sample"
 
+replicaCount: 2
+
 service:
   - name: service
     type: ClusterIP
