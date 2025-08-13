@@ -4,8 +4,10 @@ description: Serves GCS bucket content via simple HTTP server
 home: https://github.com/bosbaber/bucketup
 
 type: application
-version: 1.0.0
-appVersion: "v1.0.2"
+# Gets replaced during release
+version: 1.0.0 
+# Gets replaced during release
+appVersion: "v1.0.0" 
 
 dependencies:
   - name: common

@@ -166,7 +166,12 @@ jobs:
 
       - name: Package chart
         run: |
+          # Patch Chart.yaml with version and appVersion
+          sed -i "s/^version: .*/version: ${{ steps.ver.outputs.clean }}/" Chart.yaml
+          sed -i "s/^appVersion: .*/appVersion: \"v${{ steps.ver.outputs.clean }}\"/" Chart.yaml
+          # Package the chart into the tmp directory
           mkdir -p tmp
+          helm dep update .
           helm package . \
             --version "${{ steps.ver.outputs.clean }}" \
             --app-version "${{ steps.ver.outputs.raw }}" \
