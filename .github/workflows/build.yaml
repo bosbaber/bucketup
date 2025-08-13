@@ -75,7 +75,10 @@ jobs:
           # Do the health check manually
           curl -sfS http://127.0.0.1:8080/healthz                    
           # Test the service
-          curl -sv http://127.0.0.1:8080/ --max-time 10 -o /dev/null
+            # Test the service and verify response contains "Hello, bucketup!"
+            RESPONSE=$(curl -sfS http://127.0.0.1:8080/ --max-time 10)
+            echo "$RESPONSE"
+            echo "$RESPONSE" | grep -q "Hello, bucketup!"
 
       - name: Dump K8s diagnostics (on failure)
         if: ${{ failure() }}
