@@ -70,6 +70,8 @@ jobs:
           kubectl -n test get deployments
           # Get all logs for the bucketup deployment
           kubectl -n test logs deployment/bucketup --all-containers=true
+          # Do the health check manually
+          curl -sfS http://127.0.0.1:8080/healthz                    
           # Test the service
           curl -sv http://127.0.0.1:8080/ --max-time 10 -o /dev/null
 
