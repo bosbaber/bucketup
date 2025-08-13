@@ -1,5 +1,5 @@
 # Bucketup
-![Publish Status](https://github.com/bosbaber/bucketup/actions/workflows/build/badge.svg)
+![Publish Status](https://github.com/bosbaber/bucketup/actions/workflows/build.yaml/badge.svg)
 
 As a Kubernetes administrator there are times where we just need to serve some static content from inside our cluster so that we can either test out some new ingress settings, or provide arbitrary assets to a internal service.
 
