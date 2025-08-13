@@ -10,6 +10,11 @@ service:
         protocol: TCP
         name: http
 
+concurrency:
+  group: main
+  cancel-in-progress: true
+  max: 1
+
 containers:
   - name: server
     image:
