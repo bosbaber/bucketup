@@ -17,30 +17,3 @@ concurrency:
   cancel-in-progress: true
   max: 1
 
-containers:
-  - name: server
-    image:
-      repository: ghcr.io/bosbaber
-      name: bucketup
-      pullPolicy: Always
-    resources:
-      requests:
-        memory: 128Mi
-        cpu: 100m
-      limits:
-        memory: 512Mi
-        cpu: 1
-    readinessProbe:
-      httpGet:
-        path: /healthz
-        port: 8080
-      initialDelaySeconds: 5
-    livenessProbe:
-      httpGet:
-        path: /healthz
-        port: 8080
-      initialDelaySeconds: 5
-    ports:
-      - name: http
-        containerPort: 8080
-        protocol: TCP
