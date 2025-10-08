@@ -16,81 +16,81 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  # build-and-test:
-  #   name: Build image and test chart on Kind
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: read
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
+  build-and-test:
+    name: Build image and test chart on Kind
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  #     - name: Set up Kind
-  #       uses: engineerd/setup-kind@v0.6.2
+      # - name: Set up Kind
+      #   uses: engineerd/setup-kind@v0.6.2
 
-  #     - name: Set up kubectl
-  #       uses: azure/setup-kubectl@v3
+      # - name: Set up kubectl
+      #   uses: azure/setup-kubectl@v3
 
-  #     - name: Build Docker image (local, do not push)
-  #       uses: docker/build-push-action@v6
-  #       with:
-  #         context: .
-  #         file: docker/Dockerfile
-  #         push: false
-  #         load: true
-  #         tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:ci
+      - name: Build Docker image (local, do not push)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile
+          push: false
+          load: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:ci
 
-  #     - name: Load image into Kind
-  #       run: |
-  #         kind load docker-image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:ci
+      # - name: Load image into Kind
+      #   run: |
+      #     kind load docker-image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:ci
 
-  #     - name: Set up Helm
-  #       uses: azure/setup-helm@v3
+      # - name: Set up Helm
+      #   uses: azure/setup-helm@v3
 
-  #     - name: Install chart into Kind (override image tag) and collect debug info on failure
-  #       run: |
-  #         set -euxo pipefail
+      # - name: Install chart into Kind (override image tag) and collect debug info on failure
+      #   run: |
+      #     set -euxo pipefail
           
-  #         helm dep update
+      #     helm dep update
 
-  #         echo "Rendering chart for troubleshooting purposes"
-  #         helm template bucketup . --namespace test --create-namespace -f testing/test-values.yaml
+      #     echo "Rendering chart for troubleshooting purposes"
+      #     helm template bucketup . --namespace test --create-namespace -f testing/test-values.yaml
 
-  #         echo "Installing chart into Kind"
-  #         helm install bucketup . --namespace test --create-namespace --wait --timeout 5m --debug --atomic -f testing/test-values.yaml
+      #     echo "Installing chart into Kind"
+      #     helm install bucketup . --namespace test --create-namespace --wait --timeout 5m --debug --atomic -f testing/test-values.yaml
  
 
-  #     - name: Wait for patched pod to be ready
-  #       run: |
-  #         kubectl -n test rollout status deploy -l app.kubernetes.io/instance=bucketup --timeout=180s
-  #         kubectl -n test wait --for=condition=ready pod -l app.kubernetes.io/instance=bucketup --timeout=180s
+      # - name: Wait for patched pod to be ready
+      #   run: |
+      #     kubectl -n test rollout status deploy -l app.kubernetes.io/instance=bucketup --timeout=180s
+      #     kubectl -n test wait --for=condition=ready pod -l app.kubernetes.io/instance=bucketup --timeout=180s
 
-  #     - name: Test service
-  #       run: |
-  #         # Port forward the service to localhost
-  #         kubectl -n test port-forward svc/bucketup-service 8080:8080 &
-  #         # Wait for the port forward to be established
-  #         sleep 20
-  #         kubectl -n test get deployments
-  #         # Get all logs for the bucketup deployment
-  #         kubectl -n test logs deployment/bucketup --all-containers=true
-  #         # Do the health check manually
-  #         curl -sfS http://127.0.0.1:8080/healthz                    
-  #         # Test the service
-  #           # Test the service and verify response contains "Hello, bucketup!"
-  #           RESPONSE=$(curl -sfS http://127.0.0.1:8080/ --max-time 10)
-  #           echo "$RESPONSE"
-  #           echo "$RESPONSE" | grep -q "Hello, bucketup!"
+      # - name: Test service
+      #   run: |
+      #     # Port forward the service to localhost
+      #     kubectl -n test port-forward svc/bucketup-service 8080:8080 &
+      #     # Wait for the port forward to be established
+      #     sleep 20
+      #     kubectl -n test get deployments
+      #     # Get all logs for the bucketup deployment
+      #     kubectl -n test logs deployment/bucketup --all-containers=true
+      #     # Do the health check manually
+      #     curl -sfS http://127.0.0.1:8080/healthz                    
+      #     # Test the service
+      #       # Test the service and verify response contains "Hello, bucketup!"
+      #       RESPONSE=$(curl -sfS http://127.0.0.1:8080/ --max-time 10)
+      #       echo "$RESPONSE"
+      #       echo "$RESPONSE" | grep -q "Hello, bucketup!"
 
-  #     - name: Dump K8s diagnostics (on failure)
-  #       if: ${{ failure() }}
-  #       run: |
-  #         set -x
-  #         kubectl -n test get all
-  #         kubectl -n test get events --sort-by=.lastTimestamp | tail -200
-  #         kubectl -n test describe deploy,sts,ds,svc,ingress,po
-  #         # Logs for all pods
-  #         for p in $(kubectl -n test get po -o name); do kubectl -n test logs "$p" --all-containers=true --tail=200 || true; done                  
+      # - name: Dump K8s diagnostics (on failure)
+      #   if: ${{ failure() }}
+      #   run: |
+      #     set -x
+      #     kubectl -n test get all
+      #     kubectl -n test get events --sort-by=.lastTimestamp | tail -200
+      #     kubectl -n test describe deploy,sts,ds,svc,ingress,po
+      #     # Logs for all pods
+      #     for p in $(kubectl -n test get po -o name); do kubectl -n test logs "$p" --all-containers=true --tail=200 || true; done                  
 
   build-and-push-image:
     name: Build and push Docker image
