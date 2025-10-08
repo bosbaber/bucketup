@@ -1,2 +1,3 @@
 # Test overrides for CI: avoid GCS, serve a simple static page
-tag: ci
+image:
+  tag: "ci"
