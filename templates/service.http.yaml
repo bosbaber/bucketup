@@ -1,0 +1,4 @@
+{{- define "bucketup.http.service" -}}
+{{- $top := first . -}}
+{{- end }}
+{{- include "common.svc" (list . .Values.web.service.http .Values.web "bucketup.http.service") }}
