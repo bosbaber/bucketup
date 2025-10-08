@@ -1,13 +1,3 @@
 {{- define "bucketup.deployment" -}}
-{{- $top := first . }}
-{{- if $top.Values.web.enabled }}
-{{- $cfgObj := include "common.configMapper" (list $top $top.Values.configMap) | fromYaml -}}
-{{- $dataHash := $cfgObj.data | toJson | sha256sum -}}
-spec:
-  template:
-    metadata:
-      annotations:
-        configmap-sha256: {{ $dataHash | quote }}
-{{- end }}
 {{- end }}
 {{- include "common.deployment" (list . .Values.web .Values.web.autoscaling .Values.web.serviceAccount "bucketup.deployment") }}
