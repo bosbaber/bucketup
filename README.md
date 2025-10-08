@@ -24,6 +24,7 @@ helm repo add bucketuprepo https://bosbaber.github.io/bucketup
 helm install bucketup bucketuprepo/bucketup --set bucketName="my-gcs-bucket-name"
 ```
 
+Setting the bucketName is mandatory.
 ## Limitations
 
 * Currently supports **publicly accessible** GCS buckets only.
