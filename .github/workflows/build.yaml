@@ -51,6 +51,8 @@ jobs:
         run: |
           set -euxo pipefail
           
+          helm dep update
+
           echo "Rendering chart for troubleshooting purposes"
           helm template bucketup . --namespace test --create-namespace -f testing/test-values.yaml
 
