@@ -1,35 +1,13 @@
-{{- include "common.deployment" (list . .Values .Values.autoscaling .Values.serviceAccount "bucketup.deployment") }}
-
-containers:
-  - name: server
-    image:
-      repository: ghcr.io/bosbaber
-      name: bucketup
-      pullPolicy: Always
-    envFrom:
-      - configMapRef:
-          name: {{ include "common.fullname" . }}
-    resources:
-      requests:
-        memory: 128Mi
-        cpu: 100m
-      limits:
-        memory: 512Mi
-        cpu: 1
-    readinessProbe:
-      httpGet:
-        path: /healthz
-        port: 8080
-      initialDelaySeconds: 5
-    livenessProbe:
-      httpGet:
-        path: /healthz
-        port: 8080
-      initialDelaySeconds: 5
-    ports:
-      - name: http
-        containerPort: 8080
-        protocol: TCP
-
 {{- define "bucketup.deployment" -}}
+{{- $top := first . }}
+{{- if $top.Values.web.enabled }}
+{{- $cfgObj := include "common.configMapper" (list $top $top.Values.configMap) | fromYaml -}}
+{{- $dataHash := $cfgObj.data | toJson | sha256sum -}}
+spec:
+  template:
+    metadata:
+      annotations:
+        configmap-sha256: {{ $dataHash | quote }}
 {{- end }}
+{{- end }}
+{{- include "common.deployment" (list . .Values.web .Values.web.autoscaling .Values.web.serviceAccount "bucketup.deployment") }}

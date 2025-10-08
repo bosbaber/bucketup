@@ -1,19 +1,63 @@
 bucketName: "bucketup-sample"
 
-replicaCount: 2
 
-service:
-  - name: service
-    type: ClusterIP
-    annotations: {}
-    ports:
-      - port: 8080
-        targetPort: 8080
-        protocol: TCP
-        name: http
+image:
+  repository: ghcr.io/bosbaber
+  name: bucketup
 
-concurrency:
-  group: main
-  cancel-in-progress: true
-  max: 1
+web:
+  name: web
+  enabled: true
+  replicaCount: 2
+  serviceAccount: {}
+    # create: false
+    # name: "webksa"
+  # imagePullPolicy: IfNotPresent
+  service:
+    http:
+      name: web
+      type: ClusterIP
+      ports:
+        - port: 8080
+          targetPort: http
+          protocol: TCP
+          name: http
+  ports:
+    - name: http
+      containerPort: 8080
+      protocol: TCP
+  resources:
+    requests:
+      memory: 64Mi
+      cpu: 10m
+  initContainers: []
+  sidecars: []  
+  env:
+  - name: BUCKET_NAME
+    configMapKeyRef:
+      name: '{{ include "common.fullname" . }}'
+      key: bucketName
+  ports:
+    - name: http
+      containerPort: 8080
+      protocol: TCP
+  # command: []
+  # args: []
+  # livenessProbe: {}
+  readinessProbe:
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+    httpGet:
+      path: /healthz
+      port: 8080   
+  # volumeMounts: []
+  # securityContext: {}
 
+configMap:
+  name: "config"
+  contentMap:
+    - key: BUCKET_NAME
+      valueRef: bucketName
