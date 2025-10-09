@@ -23,7 +23,7 @@ jobs:
       contents: read
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # - name: Set up Kind
       #   uses: engineerd/setup-kind@v0.6.2
@@ -104,7 +104,7 @@ jobs:
       id-token: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3
@@ -150,7 +150,7 @@ jobs:
       packages: write
     steps:
       - name: Checkout repository (full history so we can switch branches)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           persist-credentials: true  # uses GITHUB_TOKEN for pushes
