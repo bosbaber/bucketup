@@ -156,7 +156,7 @@ jobs:
           persist-credentials: true  # uses GITHUB_TOKEN for pushes
 
       - name: Set up Helm
-        uses: azure/setup-helm@v3
+        uses: azure/setup-helm@v4
 
       - name: Derive chart version from tag (strip leading "v" if present)
         id: ver
