@@ -1,7 +1,7 @@
 bucketName: "bucketup-sample"
 
 
-image:
+imageOverride:
   repository: ghcr.io/bosbaber
   name: bucketup
 
