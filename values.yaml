@@ -34,13 +34,10 @@ web:
   sidecars: []  
   env:
   - name: BUCKET_NAME
-    configMapKeyRef:
-      name: '{{ include "common.fullname" . }}'
-      key: bucketName
-  ports:
-    - name: http
-      containerPort: 8080
-      protocol: TCP
+    valueFrom:
+      configMapKeyRef:      
+        name: '{{ include "common.fullname" . }}'
+        key: bucketName
   # command: []
   # args: []
   # livenessProbe: {}
