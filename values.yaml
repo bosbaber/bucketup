@@ -56,5 +56,5 @@ web:
 configMap:
   name: "config"
   contentMap:
-    - key: BUCKET_NAME
+    - key: bucketName
       valueRef: bucketName
