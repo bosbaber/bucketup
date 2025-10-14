@@ -2,8 +2,26 @@ apiVersion: v1
 entries:
   bucketup:
   - apiVersion: v2
+    appVersion: v1.1.13
+    created: "2025-10-14T11:17:46.567485646Z"
+    dependencies:
+    - name: common
+      repository: https://interledger.github.io/charts/interledger
+      version: 0.8.0
+    description: Serves GCS bucket content via simple HTTP server
+    digest: 01cd65dd0c5082813a7aaa7f031a09f8fffed409ea1245ecc224b82e89b96c1c
+    home: https://github.com/bosbaber/bucketup
+    maintainers:
+    - email: stephan@interledger.foundation
+      name: Stephan Butler
+    name: bucketup
+    type: application
+    urls:
+    - https://bosbaber.github.io/bucketup/bucketup-1.1.13.tgz
+    version: 1.1.13
+  - apiVersion: v2
     appVersion: v1.1.12
-    created: "2025-10-13T16:46:37.108444281Z"
+    created: "2025-10-14T11:17:46.553295268Z"
     dependencies:
     - name: common
       repository: https://interledger.github.io/charts/interledger
@@ -21,7 +39,7 @@ entries:
     version: 1.1.12
   - apiVersion: v2
     appVersion: v1.1.11
-    created: "2025-10-13T16:46:37.097003229Z"
+    created: "2025-10-14T11:17:46.541948792Z"
     dependencies:
     - name: common
       repository: https://interledger.github.io/charts/interledger
@@ -39,7 +57,7 @@ entries:
     version: 1.1.11
   - apiVersion: v2
     appVersion: v1.1.3
-    created: "2025-10-13T16:46:37.112601178Z"
+    created: "2025-10-14T11:17:46.572668959Z"
     dependencies:
     - name: common
       repository: https://interledger.github.io/charts/interledger
@@ -57,7 +75,7 @@ entries:
     version: 1.1.3
   - apiVersion: v2
     appVersion: v1.0.6
-    created: "2025-10-13T16:46:37.089500894Z"
+    created: "2025-10-14T11:17:46.534593712Z"
     dependencies:
     - name: common
       repository: https://interledger.github.io/charts/interledger
@@ -75,7 +93,7 @@ entries:
     version: 1.0.6
   - apiVersion: v2
     appVersion: v1.0.5
-    created: "2025-10-13T16:46:37.086306831Z"
+    created: "2025-10-14T11:17:46.530824625Z"
     dependencies:
     - name: common
       repository: https://interledger.github.io/charts/interledger
@@ -93,7 +111,7 @@ entries:
     version: 1.0.5
   - apiVersion: v2
     appVersion: v1.0.4
-    created: "2025-10-13T16:46:37.083053501Z"
+    created: "2025-10-14T11:17:46.527036054Z"
     dependencies:
     - name: common
       repository: https://interledger.github.io/charts/interledger
@@ -111,7 +129,7 @@ entries:
     version: 1.0.4
   - apiVersion: v2
     appVersion: v1.0.3
-    created: "2025-10-13T16:46:37.081093208Z"
+    created: "2025-10-14T11:17:46.525079852Z"
     dependencies:
     - name: common
       repository: https://interledger.github.io/charts/interledger
@@ -127,4 +145,4 @@ entries:
     urls:
     - https://bosbaber.github.io/bucketup/bucketup-1.0.3.tgz
     version: 1.0.3
-generated: "2025-10-13T16:46:37.079244324Z"
+generated: "2025-10-14T11:17:46.523284921Z"
