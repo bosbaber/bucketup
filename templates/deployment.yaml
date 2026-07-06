@@ -1,4 +1,35 @@
+{{/*
+common.pod.template.tpl (common-0.8.0) renders the pod-level "volumes:" key
+at the wrong indentation, nesting it under "template" instead of
+"template.spec". Setting .Values.web.volumes would trigger that buggy code
+path, so instead the deploy-key volume is injected here via the
+"bucketup.deployment" override, which common.utils.merge deep-merges into
+the correctly-nested spec.template.spec after the library template renders.
+*/}}
 {{- define "bucketup.deployment" -}}
+{{- $top := first . }}
+{{- if eq $top.Values.config.source "git" }}
+spec:
+  template:
+    spec:
+      volumes:
+        - name: git-deploy-key
+          secret:
+            secretName: {{ $top.Values.config.git.access.privateKeySecretName }}
+            defaultMode: 0444
+            items:
+              - key: {{ $top.Values.config.git.access.privateKeySecretKey }}
+                path: deploy_key
+{{- end }}
+{{- end }}
+{{- if eq .Values.config.source "git" }}
+{{- $deployKeyMount := dict
+      "name" "git-deploy-key"
+      "mountPath" "/mnt/secrets/git"
+      "readOnly" true
+}}
+{{- $_ := set .Values.web "volumeMounts" (concat (default (list) .Values.web.volumeMounts) (list $deployKeyMount)) }}
+{{- $_ := set .Values.web "env" (concat .Values.web.env (list (dict "name" "GIT_SSH_KEY_PATH" "value" "/mnt/secrets/git/deploy_key"))) }}
 {{- end }}
 {{- if eq .Values.config.source "git" }}
 {{- $deployKeyVolume := dict
