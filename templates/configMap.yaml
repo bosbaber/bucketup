@@ -1,3 +1,25 @@
 {{- define "bucketupconfigMap" -}}
 {{- end }}
+{{- if not (has .Values.config.source (list "gcs" "git")) }}
+{{- fail (printf "config.source must be \"gcs\" or \"git\", got %q" .Values.config.source) }}
+{{- end }}
+{{- if eq .Values.config.source "gcs" }}
+{{- if not .Values.config.gcs.bucketName }}
+{{- fail "config.gcs.bucketName is required when config.source is \"gcs\"" }}
+{{- end }}
+{{- end }}
+{{- if eq .Values.config.source "git" }}
+{{- if not .Values.config.git.repository }}
+{{- fail "config.git.repository is required when config.source is \"git\"" }}
+{{- end }}
+{{- if not .Values.config.git.branch }}
+{{- fail "config.git.branch is required when config.source is \"git\"" }}
+{{- end }}
+{{- if not .Values.config.git.access.privateKeySecretName }}
+{{- fail "config.git.access.privateKeySecretName is required when config.source is \"git\"" }}
+{{- end }}
+{{- if not .Values.config.git.access.privateKeySecretKey }}
+{{- fail "config.git.access.privateKeySecretKey is required when config.source is \"git\"" }}
+{{- end }}
+{{- end }}
 {{- include "common.configMapper" (list . .Values.configMap "bucketupconfigMap") }}
