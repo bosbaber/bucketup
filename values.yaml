@@ -9,6 +9,10 @@ config:
     # only ssh cloning is supported
     repository: ""
     branch: "main"
+    # How often (in seconds) to check the branch for new commits and
+    # refresh content in place. 0 (default) disables polling; content is
+    # then only fetched once, at container startup.
+    pollIntervalSeconds: 0
     access:
       isPrivate: true
       # The user should configure an ssh deploy key with RO permissions
@@ -70,6 +74,11 @@ web:
       configMapKeyRef:
         name: '{{ include "common.fullname" . }}-config'
         key: gitBranch
+  - name: GIT_POLL_INTERVAL
+    valueFrom:
+      configMapKeyRef:
+        name: '{{ include "common.fullname" . }}-config'
+        key: gitPollIntervalSeconds
   # command: []
   # args: []
   # livenessProbe: {}
@@ -96,3 +105,5 @@ configMap:
       valueRef: config.git.repository
     - key: gitBranch
       valueRef: config.git.branch
+    - key: gitPollIntervalSeconds
+      valueRef: config.git.pollIntervalSeconds
