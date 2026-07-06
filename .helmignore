@@ -1,0 +1,9 @@
+# Patterns to ignore when building packages.
+.git/
+.gitignore
+.github/
+.mypy_cache/
+.helmignore
+*.md
+docker/
+testing/
