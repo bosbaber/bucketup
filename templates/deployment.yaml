@@ -31,4 +31,22 @@ spec:
 {{- $_ := set .Values.web "volumeMounts" (concat (default (list) .Values.web.volumeMounts) (list $deployKeyMount)) }}
 {{- $_ := set .Values.web "env" (concat .Values.web.env (list (dict "name" "GIT_SSH_KEY_PATH" "value" "/mnt/secrets/git/deploy_key"))) }}
 {{- end }}
+{{- if eq .Values.config.source "git" }}
+{{- $deployKeyVolume := dict
+      "name" "git-deploy-key"
+      "secret" (dict
+        "secretName" .Values.config.git.access.privateKeySecretName
+        "defaultMode" 0444
+        "items" (list (dict "key" .Values.config.git.access.privateKeySecretKey "path" "deploy_key"))
+      )
+}}
+{{- $deployKeyMount := dict
+      "name" "git-deploy-key"
+      "mountPath" "/mnt/secrets/git"
+      "readOnly" true
+}}
+{{- $_ := set .Values.web "volumes" (concat (default (list) .Values.web.volumes) (list $deployKeyVolume)) }}
+{{- $_ := set .Values.web "volumeMounts" (concat (default (list) .Values.web.volumeMounts) (list $deployKeyMount)) }}
+{{- $_ := set .Values.web "env" (concat .Values.web.env (list (dict "name" "GIT_SSH_KEY_PATH" "value" "/mnt/secrets/git/deploy_key"))) }}
+{{- end }}
 {{- include "common.deployment" (list . .Values.web .Values.web.autoscaling .Values.web.serviceAccount "bucketup.deployment") }}
